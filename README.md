@@ -9,7 +9,7 @@
 
 ## Usage
 
-1. Press "FOLLOWW" button. After then count of followers will increase by 1 and
+1. Press "FOLLOW" button. After then count of followers will increase by 1 and
    following status inside button area will chenges to "FOLLOWING" with color
    effect.
 2. Refresh page to make sure that data doesn`t lost
