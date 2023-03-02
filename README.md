@@ -14,5 +14,5 @@
    effect.
 2. Refresh page to make sure that data doesn`t lost
 3. Press "FOLLOWING" button. After then count of followers will decrease by 1
-   and following status inside button area will chenges ифсл to "FOLLOW" with
-   default color effect.
+   and following status inside button area will chenges to "FOLLOW" with default
+   color effect.
