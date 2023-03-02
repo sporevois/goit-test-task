@@ -1,0 +1,17 @@
+.btn {
+    display: inline-block;
+    width: 196px;
+    padding-top: 14px;
+    margin: 10px 0 36px;
+    padding-bottom: 14px;
+    border-radius: 10.31px;
+    border: none;
+    color: #373737;
+    background-color: #EBD8FF;
+    filter: drop-shadow(0 3.44px 3.44px rgba(0, 0, 0, 0.25));
+    transition: 250ms;
+    font-size: 18px;
+    line-height: 1.22;
+    font-weight: 600;
+    font-family: 'Montserrat';
+}

@@ -1,46 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import CardAvatar from './CardAvatar/CardAvatar';
+import CardInfo from './CardInfo/CardInfo';
+import Button from './Button/Button';
+import Logo from './Logo/Logo';
 import styles from '../components/App.module.css';
-import { ReactComponent as Logo } from './Logo.svg';
 
 export const App = () => {
-  const [followersCount, setFollowersCount] = useState(100500);
-  const [followingStatus, setFollowingStatus] = useState('FOLLOW');
-  const [isFollowing, setIsFollow] = useState(false);
+  const storedSettings = JSON.parse(localStorage.getItem('settings'));
+
+  const [followersCount, setFollowersCount] = useState(() =>
+    storedSettings ? storedSettings.followersCount : 100500
+  );
+  const [followingStatus, setFollowingStatus] = useState(() =>
+    storedSettings ? storedSettings.followingStatus : 'follow'
+  );
+  const [isFollowing, setIsFollow] = useState(() =>
+    storedSettings ? storedSettings.isFollowing : false
+  );
+
+  useEffect(() => {
+    const settings = {
+      followersCount,
+      followingStatus,
+      isFollowing,
+    };
+
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }, [isFollowing, followersCount, followingStatus]);
 
   const toggleFollowingStatus = () => {
     if (isFollowing === false) {
       setIsFollow(true);
-      setFollowingStatus('FOLLOWING');
+      setFollowingStatus('following');
       setFollowersCount(prev => prev + 1);
     } else if (isFollowing === true) {
       setIsFollow(false);
-      setFollowingStatus('FOLLOW');
+      setFollowingStatus('follow');
       setFollowersCount(prev => prev - 1);
     }
-  };
-
-  const formatCount = number => {
-    const numberFormat = new Intl.NumberFormat('en-US');
-    return numberFormat.format(number);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.background}>
         <div className={styles.card}>
-          <div className={styles.logo}>
-            <Logo />
-          </div>
-          <p className={styles.text}>777 TWEETS</p>
-          <p className={styles.text}>{formatCount(followersCount)} FOLLOWERS</p>
-          <button
-            className={styles.btn}
-            style={isFollowing ? { backgroundColor: '#5CD3A8' } : {}}
-            type="button"
-            onClick={toggleFollowingStatus}
-          >
-            {followingStatus}
-          </button>
+          <Logo />
+          <CardAvatar />
+          <CardInfo followersCount={followersCount} />
+          <Button
+            isFollowing={isFollowing}
+            followingStatus={followingStatus}
+            onClick={() => toggleFollowingStatus()}
+          />
         </div>
       </div>
     </div>
